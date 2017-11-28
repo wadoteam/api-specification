@@ -1,0 +1,14 @@
+swagger: '2.0'
+info:
+  description: Web Application Development Ontology
+  version: 1.0.0
+  title: WADO
+  contact:
+    email: alex@furculita.net
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: api.wadoteam.github.io
+basePath: /
+schemes:
+- http
