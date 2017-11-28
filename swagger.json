@@ -1,0 +1,151 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Web Application Development Ontology",
+    "version": "1.0.0",
+    "title": "WADO",
+    "contact": {
+      "email": "alex@furculita.net"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "api.wadoteam.github.io",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "search",
+      "description": "Search"
+    }
+  ],
+  "paths": {
+    "/search-suggestions": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Get suggestions for search",
+        "description": "Suggestions can be provided for search autocompletion",
+        "operationId": "getSuggestions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query string to be considered for search",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SearchSuggestion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search-results": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Get results for search query",
+        "description": "Results returned at search",
+        "operationId": "search",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query string used for search",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for search results",
+            "required": false,
+            "default": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SearchResult"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SearchSuggestion": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "example": "doggie"
+        }
+      }
+    },
+    "SearchResult": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "example": "doggie"
+        },
+        "page": {
+          "type": "integer",
+          "example": 3
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Wado",
+    "url": "https://wadoteam.github.io"
+  }
+}
