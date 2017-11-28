@@ -12,3 +12,81 @@ host: api.wadoteam.github.io
 basePath: /
 schemes:
 - http
+tags:
+  - name: search
+    description: Search
+paths:
+  /search-suggestions:
+    get:
+      tags:
+        - search
+      summary: Get suggestions for search
+      description: Multiple status values can be provided with comma separated strings
+      operationId: getSuggestions
+      produces:
+        - application/json
+      parameters:
+        - name: query
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SearchSuggestion'
+  /search-results:
+    get:
+      tags:
+        - search
+      summary: Get results for search query
+      description: Multiple status values can be provided with comma separated strings
+      operationId: search
+      produces:
+        - application/json
+      parameters:
+        - name: query
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SearchResult'
+definitions:
+  SearchSuggestion:
+    type: object
+    required:
+      - query
+    properties:
+      query:
+        type: string
+        example: doggie
+  SearchResult:
+    type: object
+    required:
+      - query
+    properties:
+      query:
+        type: string
+        example: doggie
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+externalDocs:
+  description: Find out more about Wado
+  url: 'https://wadoteam.github.io'
