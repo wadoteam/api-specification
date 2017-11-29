@@ -19,30 +19,25 @@
   ],
   "tags": [
     {
-      "name": "search",
-      "description": "Search"
+      "name": "concepts",
+      "description": "Programming concepts"
+    },
+    {
+      "name": "repository",
+      "description": "Repositories"
     }
   ],
   "paths": {
-    "/search-suggestions": {
+    "/programming-languages": {
       "get": {
         "tags": [
-          "search"
+          "concepts"
         ],
-        "summary": "Get suggestions for search",
-        "description": "Suggestions can be provided for search autocompletion",
-        "operationId": "getSuggestions",
+        "summary": "Get programming languages",
+        "description": "Get a list of available programming languages",
+        "operationId": "getProgrammingLanguages",
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "query",
-            "in": "query",
-            "description": "Query string to be considered for search",
-            "required": true,
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
@@ -50,31 +45,226 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/SearchSuggestion"
+                "$ref": "#/definitions/ProgrammingLanguage"
               }
             }
           }
         }
       }
     },
-    "/search-results": {
+    "/programming-languages/{name}": {
       "get": {
         "tags": [
-          "search"
+          "concepts"
         ],
-        "summary": "Get results for search query",
-        "description": "Results returned at search",
-        "operationId": "search",
+        "summary": "Get a programming language by name",
+        "description": "Get a programming language by name",
+        "operationId": "getProgrammingLanguageByName",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the programming language",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ProgrammingLanguage"
+            }
+          }
+        }
+      }
+    },
+    "/paradigms": {
+      "get": {
+        "tags": [
+          "concepts"
+        ],
+        "summary": "Get paradigms",
+        "description": "Get a list of available paradigms",
+        "operationId": "getParadigms",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Paradigm"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/paradigms/{name}": {
+      "get": {
+        "tags": [
+          "concepts"
+        ],
+        "summary": "Get a paradigm by name",
+        "description": "Get a paradigm by name",
+        "operationId": "getParadigmByName",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the paradigm",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Paradigm"
+            }
+          }
+        }
+      }
+    },
+    "/methodologies": {
+      "get": {
+        "tags": [
+          "concepts"
+        ],
+        "summary": "Get frameworks",
+        "description": "Get a list of available methodologies",
+        "operationId": "getMethodologies",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Methodology"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/methodologies/{name}": {
+      "get": {
+        "tags": [
+          "concepts"
+        ],
+        "summary": "Get a methodology by name",
+        "description": "Get a methodology by name",
+        "operationId": "getMethodologyByName",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the methodology",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Methodology"
+            }
+          }
+        }
+      }
+    },
+    "/frameworks": {
+      "get": {
+        "tags": [
+          "concepts"
+        ],
+        "summary": "Get frameworks",
+        "description": "Get a list of available frameworks",
+        "operationId": "getFrameworks",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Framework"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/frameworks/{name}": {
+      "get": {
+        "tags": [
+          "concepts"
+        ],
+        "summary": "Get a framework by name",
+        "description": "Get a framework by name",
+        "operationId": "getFrameworkByName",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the framework",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Framework"
+            }
+          }
+        }
+      }
+    },
+    "/repositories": {
+      "get": {
+        "tags": [
+          "repository"
+        ],
+        "summary": "Get repositories",
+        "description": "Get repositories",
+        "operationId": "getRepositories",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "query",
+            "name": "filter",
             "in": "query",
-            "description": "Query string used for search",
-            "required": true,
-            "type": "string"
+            "description": "Filter query for repositories",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "page",
@@ -91,7 +281,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/SearchResult"
+                "$ref": "#/definitions/Repository"
               }
             }
           }
@@ -100,46 +290,90 @@
     }
   },
   "definitions": {
-    "SearchSuggestion": {
+    "ProgrammingLanguage": {
       "type": "object",
       "required": [
-        "query"
+        "name"
       ],
       "properties": {
-        "query": {
-          "type": "string",
-          "example": "doggie"
-        }
-      }
-    },
-    "SearchResult": {
-      "type": "object",
-      "required": [
-        "query"
-      ],
-      "properties": {
-        "query": {
+        "name": {
           "type": "string",
           "example": "doggie"
         },
-        "page": {
+        "description": {
+          "type": "string",
+          "example": "Awesome description"
+        }
+      }
+    },
+    "Paradigm": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "doggie"
+        },
+        "description": {
+          "type": "string",
+          "example": "Awesome description"
+        }
+      }
+    },
+    "Framework": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/ProgrammingLanguage"
+        },
+        "name": {
+          "type": "string",
+          "example": "doggie"
+        },
+        "description": {
+          "type": "string",
+          "example": "Awesome description"
+        }
+      }
+    },
+    "Methodology": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "doggie"
+        },
+        "description": {
+          "type": "string",
+          "example": "Awesome description"
+        }
+      }
+    },
+    "Repository": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
           "type": "integer",
           "example": 3
-        }
-      }
-    },
-    "ApiResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
         },
-        "type": {
-          "type": "string"
+        "url": {
+          "type": "string",
+          "example": "http://github.com/wadoteam/repository"
         },
-        "message": {
-          "type": "string"
+        "description": {
+          "type": "string",
+          "example": "Awesome repo description"
         }
       }
     }
