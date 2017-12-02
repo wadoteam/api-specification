@@ -141,7 +141,7 @@
         "tags": [
           "concepts"
         ],
-        "summary": "Get frameworks",
+        "summary": "Get methodologies",
         "description": "Get a list of available methodologies",
         "operationId": "getMethodologies",
         "produces": [
@@ -257,14 +257,31 @@
         ],
         "parameters": [
           {
-            "name": "filter",
+            "name": "paradigms",
             "in": "query",
-            "description": "Filter query for repositories",
+            "description": "Array of paradigm keys to filter by",
             "type": "array",
             "items": {
               "type": "string"
-            },
-            "collectionFormat": "multi"
+            }
+          },
+          {
+            "name": "framework",
+            "in": "query",
+            "description": "Framework key to filter by",
+            "type": "string"
+          },
+          {
+            "name": "programming_language",
+            "in": "query",
+            "description": "Programming language key to filter by",
+            "type": "string"
+          },
+          {
+            "name": "built_on_methodology",
+            "in": "query",
+            "description": "Filter by methodology",
+            "type": "string"
           },
           {
             "name": "page",
@@ -298,7 +315,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "example": "doggie"
+          "example": "Java"
         },
         "description": {
           "type": "string",
@@ -314,7 +331,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "example": "doggie"
+          "example": "ObjectOriented"
         },
         "description": {
           "type": "string",
@@ -333,7 +350,7 @@
         },
         "name": {
           "type": "string",
-          "example": "doggie"
+          "example": "Spring"
         },
         "description": {
           "type": "string",
@@ -349,7 +366,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "example": "doggie"
+          "example": "AgileDevelopment"
         },
         "description": {
           "type": "string",
