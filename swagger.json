@@ -36,6 +36,14 @@
         "summary": "Get programming languages",
         "description": "Get a list of available programming languages",
         "operationId": "getProgrammingLanguages",
+        "parameters": [
+          {
+            "name": "runs_on_platform",
+            "in": "query",
+            "description": "Filter by platform",
+            "type": "string"
+          }
+        ],
         "produces": [
           "application/json"
         ],
@@ -136,14 +144,14 @@
         }
       }
     },
-    "/methodologies": {
+    "/platforms": {
       "get": {
         "tags": [
           "concepts"
         ],
-        "summary": "Get methodologies",
-        "description": "Get a list of available methodologies",
-        "operationId": "getMethodologies",
+        "summary": "Get platforms",
+        "description": "Get a list of available platforms",
+        "operationId": "getPlatforms",
         "produces": [
           "application/json"
         ],
@@ -153,26 +161,26 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Methodology"
+                "$ref": "#/definitions/Platform"
               }
             }
           }
         }
       }
     },
-    "/methodologies/{name}": {
+    "/platforms/{key}": {
       "get": {
         "tags": [
           "concepts"
         ],
-        "summary": "Get a methodology by name",
-        "description": "Get a methodology by name",
-        "operationId": "getMethodologyByName",
+        "summary": "Get a platform by name",
+        "description": "Get a platforms by name",
+        "operationId": "getPlatformByName",
         "parameters": [
           {
-            "name": "name",
+            "name": "key",
             "in": "path",
-            "description": "The name of the methodology",
+            "description": "The key of the platform",
             "required": true,
             "type": "string"
           }
@@ -184,7 +192,75 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/Methodology"
+              "$ref": "#/definitions/Platform"
+            }
+          }
+        }
+      }
+    },
+    "/development-environments": {
+      "get": {
+        "tags": [
+          "concepts"
+        ],
+        "summary": "Get development environments",
+        "description": "Get a list of available development environments",
+        "operationId": "getDevelopmentEnvironments",
+        "parameters": [
+          {
+            "name": "has_support_for_programming_language",
+            "in": "query",
+            "description": "Filter by supported programming language",
+            "type": "string"
+          },
+          {
+            "name": "has_paradigm",
+            "in": "query",
+            "description": "Filter by paradigm",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DevelopmentEnvironment"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/development-environments/{name}": {
+      "get": {
+        "tags": [
+          "concepts"
+        ],
+        "summary": "Get a development environment by name",
+        "description": "Get a development environment by name",
+        "operationId": "getDevelopmentEnvironmentByName",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the development environment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DevelopmentEnvironment"
             }
           }
         }
@@ -198,6 +274,20 @@
         "summary": "Get frameworks",
         "description": "Get a list of available frameworks",
         "operationId": "getFrameworks",
+        "parameters": [
+          {
+            "name": "has_support_for_programming_language",
+            "in": "query",
+            "description": "Filter by supported programming language",
+            "type": "string"
+          },
+          {
+            "name": "has_paradigm",
+            "in": "query",
+            "description": "Filter by paradigm",
+            "type": "string"
+          }
+        ],
         "produces": [
           "application/json"
         ],
@@ -278,12 +368,6 @@
             "type": "string"
           },
           {
-            "name": "built_on_methodology",
-            "in": "query",
-            "description": "Filter by methodology",
-            "type": "string"
-          },
-          {
             "name": "page",
             "in": "query",
             "description": "Page number for search results",
@@ -358,7 +442,7 @@
         }
       }
     },
-    "Methodology": {
+    "DevelopmentEnvironment": {
       "type": "object",
       "required": [
         "name"
@@ -366,11 +450,28 @@
       "properties": {
         "name": {
           "type": "string",
-          "example": "AgileDevelopment"
+          "example": "Awesome DevEnv"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProgrammingLanguage"
+          }
         },
         "description": {
           "type": "string",
           "example": "Awesome description"
+        }
+      }
+    },
+    "Platform": {
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
         }
       }
     },
